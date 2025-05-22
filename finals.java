@@ -1,8 +1,14 @@
 import java.io.*;
 import java.util.*;
+import java.time.LocalTime;
 
 public class finals {
+
     public static void main(String[] args) {
+       login();
+    }
+
+    static void dashboard(){
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("");
@@ -21,7 +27,9 @@ public class finals {
             System.out.println("======================================================================================");
             System.out.println("| 4. Delete Item                                                                     |");
             System.out.println("======================================================================================");
-            System.out.println("| 5. Exit                                                                            |");
+            System.out.println("| 5. Restore Deleted Item                                                            |");
+            System.out.println("======================================================================================");
+            System.out.println("| 6. Logout                                                                          |");
             System.out.println("======================================================================================");
             System.out.println("");
             System.out.print("Enter your choice: ");
@@ -42,13 +50,92 @@ public class finals {
                     deleteItem();
                     break;
                 case 5:
-                    System.out.println("Exiting program...");
-                    return;
+                    restoreDeletedItems();
+                    break;
+                case 6:
+                    while (true) {
+                        System.out.print("Are you sure you want Logout? (yes/no)  : ");  
+                        String yn = scanner.nextLine();
+
+                        if(yn.equalsIgnoreCase("yes")){
+                            login();
+                        } else if(yn.equalsIgnoreCase("no")){
+                            dashboard();
+                        }else{
+                            System.out.println("Invalid input");
+                            continue;
+                        }
+                    }  
+                  
                 default:
                     System.out.println("Invalid choice. Try again.");
                     continue;
             }
         }
+    }
+
+    static void login(){
+        LocalTime time = LocalTime.now();
+        Scanner scanner = new Scanner(System.in);
+        String name_of_admin = "";
+        System.out.println();
+        System.out.println("======================================================================================");
+        System.out.println("|                                        Login                                       |");
+        System.out.println("======================================================================================");
+        System.out.println();
+        while(true){
+            try{
+                System.out.print("Enter username: ");
+                String uname = scanner.nextLine();
+                System.out.print("Enter password: ");
+                String pword = scanner.nextLine();
+                boolean isFound = false;            
+                        Scanner adminScan = new Scanner(new File("admin.txt"));
+                            while(adminScan.hasNextLine()){
+                                String data = adminScan.nextLine();
+                                String[] info = data.split(",");
+                                if(uname.equals(info[0]) && pword.equals(info[1])){
+                                    name_of_admin = info[2];
+                                    isFound = true;
+                                        FileWriter writer2 = new FileWriter("auditLog.txt" , true);
+                                        writer2.write(name_of_admin + time +  " Login successfully!\n");
+                                        writer2.close();
+                                    break;
+                                }else{
+                                    isFound = false;
+                                   
+                                }
+                            }
+							adminScan.close();
+                            if(isFound == true){
+                                System.out.println();
+                                System.out.println("======================================================================================");
+                                System.out.println("|                                Login  Successfully!                                |");
+                                System.out.println("======================================================================================");
+                                while (true) {
+                                    System.out.print("Continue 1: ");
+                                    String back = scanner.nextLine();
+                                    if(back.equalsIgnoreCase("1")){
+                                        dashboard();
+                                    }else{
+                                        System.out.println("Invalid input!");
+                                        continue;
+                                    }
+                                } 
+                                
+                            }else{
+                                System.out.println("======================================================================================");
+                                System.out.println("|                            Incorrect Password/Username!                            |");
+                                System.out.println("======================================================================================");
+                                continue;
+                            }    
+
+            }catch(Exception e){
+                e.printStackTrace();
+            }   
+            
+        }
+
     }
 
     //add items
@@ -71,6 +158,7 @@ public class finals {
                             nextId = currentId + 1;
                     }
             }
+
             inventoryScan.close();
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
@@ -219,7 +307,7 @@ public class finals {
                 String[] parts = data.split(",");
                    
                 if ((parts[0].equalsIgnoreCase(searchProduct) || parts[1].equalsIgnoreCase(searchProduct) || parts[2].equalsIgnoreCase(searchProduct)
-                || parts[3].equalsIgnoreCase(searchProduct)) && parts[4].equalsIgnoreCase("acitve")) {
+                || parts[3].equalsIgnoreCase(searchProduct)) && parts[4].equalsIgnoreCase("active")) {
                     System.out.printf("| %-8s | %-40s | %-10s | %-15s |\n", parts[0], parts[1], parts[2], parts[3]);  
                     System.out.println("======================================================================================");
                     found = true;
@@ -269,7 +357,7 @@ public class finals {
                 oldInventory.add(data);
 
                 String[] parts = data.split(",");
-                if (parts[0].equalsIgnoreCase(updateId) && parts[4].equalsIgnoreCase("acitve")) {
+                if (parts[0].equals(updateId) && parts[4].equalsIgnoreCase("active")) {
                     System.out.println("======================================================================================");
                     System.out.println("|                                     Inventory List                                 |");
                     System.out.println("======================================================================================");
@@ -509,7 +597,9 @@ public class finals {
         }
     }
 
+    //restore deleted items
     static void restoreDeletedItems(){
+    
         Scanner scanner = new Scanner(System.in);
         System.out.println();
         System.out.println();
@@ -522,6 +612,7 @@ public class finals {
 
         System.out.println("1. Restore deleted items");
         System.out.println("2. Back");
+        System.out.print("Enter you choice: ");
         String choice = scanner.nextLine();
         
         while (true) {
@@ -529,6 +620,102 @@ public class finals {
 
                 System.out.print("Enter ID to restore: ");
                 String id = scanner.nextLine();
+
+                ArrayList<String> oldInventory = new ArrayList<>();
+                try {
+                     Scanner inventoryScan = new Scanner(new File("inventory.txt"));
+                     boolean isFound = false;
+                     while (inventoryScan.hasNextLine()) {
+                        String data = inventoryScan.nextLine();
+                        String[] parts = data.split(",");
+                        oldInventory.add(data);
+                         if (parts[0].equalsIgnoreCase(id) && parts[4].equalsIgnoreCase("dili") ) {
+                            System.out.println("======================================================================================");
+                            System.out.println("|                                     Inventory List                                 |");
+                            System.out.println("======================================================================================");
+                            System.out.printf("| %-8s | %-40s | %-10s | %-15s |\n", "ID", "Name", "Quantity", "Price");
+                            System.out.println("======================================================================================");
+                            System.out.printf("| %-8s | %-40s | %-10s | %-15s |\n", parts[0], parts[1], parts[2], parts[3]);  
+                            System.out.println("======================================================================================");
+                            System.out.println();
+                            System.out.println(); 
+                            while (true) {
+                                System.out.print("Are you sure you want to Restore " + parts[1] + "? (yes/no)  : ");  
+                                String yn = scanner.nextLine();
+
+                                if(yn.equalsIgnoreCase("yes")){
+                                    isFound = true;
+                                    break;
+                                } else if(yn.equalsIgnoreCase("no")){
+                                    return;
+                                }else{
+                                    System.out.println("Invalid input");
+                                    continue;
+                                }
+                            }  
+                        } 
+                     }
+
+                     if(isFound){
+                        FileWriter writer = new FileWriter("inventory.txt");
+                        boolean isGood = false;
+                        String idNiSya = "", nameNiSya = "", quatityNisya = "", priceNisya = "";
+                        for (String oldInv : oldInventory) {
+
+                            String[] info = oldInv.split(",");
+                            if (info[0].equalsIgnoreCase(id)) {
+                                idNiSya = info[0];
+                                nameNiSya = info[1];
+                                quatityNisya = info[2];
+                                priceNisya = info[3];
+
+                                writer.write(info[0] + "," + info[1] + "," + info[2] + "," + info[3] + "," + "active" + "\n");
+                                isGood = true;
+                            } else {
+                                writer.write(oldInv + "\n");
+                            }
+                        }
+
+                        writer.close();
+                        if (isGood) {
+                            System.out.println();
+                            System.out.println("Item Restored successfully with ID: " + idNiSya);
+                            System.out.println();
+                            System.out.println("======================================================================================");
+                            System.out.println("|                                     Inventory List                                 |");
+                            System.out.println("======================================================================================");
+                            System.out.printf("| %-8s | %-40s | %-10s | %-15s |\n", "ID", "Name", "Quantity", "Price");
+                            System.out.println("======================================================================================");
+                            System.out.printf("| %-8s | %-40s | %-10s | %-15s |\n", idNiSya, nameNiSya, quatityNisya, priceNisya);  
+                            System.out.println("======================================================================================");         
+                            while (true) {
+                                System.out.print("Back 1: ");
+                                String back = scanner.nextLine();
+                                if(back.equalsIgnoreCase("1")){
+                                    return;
+                                }else{
+                                    System.out.println("Invalid input!");
+                                    continue;
+                                }
+                            } 
+                        }
+                     }else{
+                        System.out.println("Item not found!");
+                        while (true) {
+                            System.out.print("Back 1: ");
+                            String back = scanner.nextLine();
+                            if(back.equalsIgnoreCase("1")){
+                                return;
+                            }else{
+                                System.out.println("Invalid input!");
+                                continue;
+                            }
+                        } 
+                     }
+                } catch (Exception e) {
+                   e.printStackTrace();
+                }
+               
 
 
                 
@@ -540,7 +727,9 @@ public class finals {
             }
         }
     }
-     static void viewInActiveItems() {
+
+    //view in active items
+    static void viewInActiveItems() {
 
         try{
             Scanner inventoryScan = new Scanner(new File("inventory.txt"));

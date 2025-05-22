@@ -1,8 +1,8 @@
-1,Wire,231,23424,dili
+1,Wired,213,213,active
 2,Gaming Keyboard,2,305,dili
 3,Laptop Stand,3,41,dili
-4,Mouse Pad,12,150,dili
-5,USB Hub,6,320,dili
+4,Mouse Pad,12,699,dili
+5,USB Hub,6,320,active
 6,Webcam,5,890,active
 7,HDMI Cable,8,210,dili
 8,Mechanical Keyboard,3,2999,active
@@ -11,7 +11,7 @@
 11,Desk Lamp,4,430,active
 12,Laptop Cooler,3,980,dili
 13,Router,2,1340,active
-14,Extension Cord,10,245,dili
+14,Extension Cord,10,699,dili
 15,SSD 500GB,1,2450,active
 16,Graphics Tablet,2,4350,dili
 17,External HDD 1TB,4,3099,active
@@ -28,3 +28,5 @@
 28,Monitor 24inch,2,5099,dili
 29,USB Flash Drive 64GB,10,340,active
 30,Laptop Sleeve,6,540,dili
+31,Pande Coco,3213,123123,dili
+32,Wtch,123,123,active
