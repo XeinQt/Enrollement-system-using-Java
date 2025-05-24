@@ -1,5 +1,5 @@
-1,Wired,213,213,active
-2,Gaming Keyboard,2,305,dili
+1,Wired,313,213,active
+2,Gaming Keyboard,2,305,active
 3,Laptop Stand,3,41,dili
 4,Mouse Pad,12,699,dili
 5,USB Hub,6,320,active
@@ -24,9 +24,10 @@
 24,Cable Organizer,8,75,dili
 25,Power Bank,3,1250,active
 26,Keyboard Wrist Rest,7,220,dili
-27,Ergonomic Chair,1,7250,active
+27,Ergonomic Chair,1,699,active
 28,Monitor 24inch,2,5099,dili
 29,USB Flash Drive 64GB,10,340,active
 30,Laptop Sleeve,6,540,dili
 31,Pande Coco,3213,123123,dili
 32,Wtch,123,123,active
+33,asdfads,123,231,dili
