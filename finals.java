@@ -118,7 +118,7 @@ public class finals {
                         name_of_admin = info[2];
                         isAdmin = true;
                             FileWriter writer2 = new FileWriter("auditLog.txt" , true);
-                            writer2.write(name_of_admin + time +  " Login successfully!\n");
+                            writer2.write("Name: "+ name_of_admin + " Time" + time +  " Login successfully!\n");
                             writer2.close();
                         break;
                     }else{
@@ -244,7 +244,7 @@ public class finals {
             writer.close();
             
             // Log the action
-            logAction("Add Item", String.valueOf(nextId), name, "added with quantity: " + quantity + ", price: " + price);
+            logAction("Add Item", nextId + "", name, "added with quantity: " + quantity + ", price: " + price);
             System.out.println();
             System.out.println("Item added successfully with ID: " + nextId);
             System.out.println();
@@ -1004,7 +1004,7 @@ public class finals {
             } else {
                 while (logScanner.hasNextLine()) {
                     String logEntry = logScanner.nextLine();
-                    System.out.println("| " + String.format("%-84s", logEntry) + " |");
+                    System.out.println("" + String.format("%-84s", logEntry) + "");
                     System.out.println("======================================================================================");
                 }
             }

@@ -1,5 +1,5 @@
-1,Wired,313,213,active
-2,Gaming Keyboard,2,305,active
+1,Wired Selling,313,200,active
+2,Gaming Keyboard,101,305,active
 3,Laptop Stand,3,41,dili
 4,Mouse Pad,12,699,dili
 5,USB Hub,6,320,active
@@ -31,3 +31,6 @@
 31,Pande Coco,3213,123123,dili
 32,Wtch,123,123,active
 33,asdfads,123,231,dili
+34,hotdog,100,199,active
+35,haha,123,100,active
+36,jaja,123,123,active

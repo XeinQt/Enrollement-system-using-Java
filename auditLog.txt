@@ -1,11 +1,6 @@
-Hannah06:22:22.959068100 Login successfully!
-Hannah06:23:15.965511200 Login successfully!
-Hannah06:24:40.385596800 Login successfully!
-Hannah06:26:40.800445900 Login successfully!
-Hannah06:28:33.630516300 Login successfully!
-Hannah17:37:03.661005800 Login successfully!
-Hannah12:06:01.650127900 Login successfully!
-Hannah12:31:36.236610700 Login successfully!
-Hannah13:59:47.562644700 Login successfully!
-14:00:03.150938800 - Add Quantity: Item ID 1 (Wired) added 100 items. New total: 313
-14:00:41.837117 - Admin Info Updated by: Hannah
+Name: Rico Time14:34:52.772572400 Login successfully!
+14:35:21.372500500 - Add Item: Item ID 35 (haha) added with quantity: 123, price: 100
+Name: Rico Time14:40:01.317960 Login successfully!
+14:40:33.073463400 - Add Item: Item ID 36 (jaja) added with quantity: 123, price: 123
+Name: Rico Time18:18:55.561241200 Login successfully!
+18:19:59.261203100 - Admin Info Updated by: Rico
